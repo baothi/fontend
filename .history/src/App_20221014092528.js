@@ -40,9 +40,9 @@ function App() {
       <Routes>
         <Route path='/' element={<Login/>}></Route>
         <Route path='/articles' 
-            element={<ArticleList articles={articles}/>}>
+        element={<ArticleList articles={articles}/>}>
         </Route>
-        <Route path="/articles/:slug" element={<ArticleDetails />}></Route>
+        <Route path="/articles/:slug" element={<ArticleDetails/>}></Route>
       </Routes>
       
     </div>

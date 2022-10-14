@@ -16,7 +16,7 @@ function App() {
   const [editArticle, setEditedArticle] = useState('')
 
   useEffect(() => {
-    fetch(`https://qatestapi.site/articles/`, {
+    fetch('https://qatestapi.site/articles/', {
       method:'GET',
       headers: {
         'Content-Type':'application/json',
@@ -40,9 +40,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Login/>}></Route>
         <Route path='/articles' 
-            element={<ArticleList articles={articles}/>}>
+        element={<ArticleList articles={articles}/>}>
         </Route>
-        <Route path="/articles/:slug" element={<ArticleDetails />}></Route>
       </Routes>
       
     </div>
