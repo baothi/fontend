@@ -8,12 +8,15 @@ function ArticleDetails() {
 
     const params = useParams()
     const [article, setArticle] = useState({})
+    const token = localStorage.getItem('mytoken')
+
     useEffect(() => {
         fetch(`https://qatestapi.site/articles/${params.slug}/`,{
             method:'GET',
             headers: {
                 'Content-Type':'application/json',
-                'Authorization':`Token e560b64c180a3433933f9a902976312b310ae846`
+                // 'Authorization':`Token e560b64c180a3433933f9a902976312b310ae846`
+                'Authorization':`Token ${token}`
             }
         })
         .then(resp => resp.json())

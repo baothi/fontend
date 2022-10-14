@@ -1,6 +1,7 @@
 
 import React, {useState} from 'react'
 import {useNavigate} from 'react-router-dom';
+import axios from 'axios';
 
 function Login() {
     const [username,setUsername] = useState('')
@@ -8,31 +9,28 @@ function Login() {
     const [error, setError] = useState('')
 
     let navigate = useNavigate()
+    let formData = new FormData(); 
+    formData.append("username", username);
+    formData.append("password", password);
+    const config = {     
+        headers: { 'content-type': 'multipart/form-data' }
+    }
+    const url = 'https://qatestapi.site/dj-rest-auth/login/'
+    // https://stackoverflow.com/questions/43085762/how-to-pass-form-values-as-formdata-in-reactjs-on-submit-function
 
 
-    const login = () => {
-        fetch('https://qatestapi.site/api-auth/login', {
-            method:'POST',
-            headers: {
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({username, password})
-        })
-        .then(resp => resp.json())
-        .then(result => {
-            if(result.key === undefined) {
-                setError("Invalid username or password")
-                return
-
-            }
-
-            localStorage.setItem('mytoken', result.key)
+    const login =() => {
+        axios.post(url, formData, config)
+        .then(response => {
+            localStorage.setItem('mytoken', response.data.key)
             navigate('/articles')
         })
         .catch(error => {
-            console.log(error)
-        })
-    }
+            setError("Invalid username or password")
+            return
+        });
+    };
+
 
     return (
         <div className = "container mt-4">
