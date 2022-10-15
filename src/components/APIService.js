@@ -25,4 +25,17 @@ export default class APIService extends React.Component{
         return add
 
     }
+
+    static RegisterUser(body) {
+        return fetch('https://qatestapi.site/dj-rest-auth/registration/', {
+        method:'POST',
+        headers: {
+            'Content-Type':'application/json'
+        
+        },
+        body:JSON.stringify(body)
+
+        })
+        .then(resp => resp.json())
+    }
 }

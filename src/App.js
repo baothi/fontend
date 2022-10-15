@@ -11,6 +11,8 @@ import Login from './components/Login';
 import ArticleDetails from './components/ArticleDetails';
 import {useNavigate} from 'react-router-dom';
 import AddArticle from './components/AddArticle';
+import Register from './components/Register';
+import UpdateArticle from './components/UpdateArticle';
 
 
 function App() {
@@ -54,6 +56,34 @@ function App() {
     setArticles(new_articles)
   }
 
+  const updatedData = (article) => {
+    const new_articles = articles.map(myarticle => {
+      if(myarticle.slug === article.slug) {
+        return article
+      } else {
+        return myarticle
+      }
+    })
+
+    setArticles(new_articles)
+  }
+
+  const updateBtn = (article) => {
+    setEditedArticle(article)
+
+  }
+
+  const deleteBtn = (article) => {
+    const new_articles = articles.filter(myarticle => {
+      if(myarticle.slug === article) {
+        return false;
+      }
+      return true;
+    })
+
+    setArticles(new_articles)
+  }
+
   return (
     <div>
       
@@ -63,8 +93,12 @@ function App() {
         <Route path='/articles' 
             element={<ArticleList articles={articles}/>}>
         </Route>
-        <Route path="/articles/:slug" element={<ArticleDetails />}></Route>
+        <Route path="/articles/:slug" element={<ArticleDetails updateBtn = {updateBtn} deleteBtn = {deleteBtn}/>}></Route>
         <Route path="/add" element={<AddArticle insertedArticle = {insertedArticle}/>}></Route>
+        <Route path="/register" element={<Register />}></Route>
+        <Route path="/update/:slug" element = {
+            <UpdateArticle article = {editArticle} updatedData = {updatedData}/>
+          }></Route>
       </Routes>
       
     </div>
