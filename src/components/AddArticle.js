@@ -1,7 +1,7 @@
 
 
 import React, {useState} from 'react'
-import APIService from './APIService';
+import APIService from '../components/APIService';
 import {useNavigate} from 'react-router-dom'
 import axios from 'axios';
 
@@ -22,10 +22,13 @@ function AddArticle(props) {
         }
 
         // APIService.InsertArticle({title, description}, token)
+        // .then(resp => resp.json())
         // .then(result => {
         //     props.insertedArticle(result)
         //     navigate('/articles')
         // })
+        
+        
         const url = 'https://qatestapi.site/articles/';
         const config = {     
             headers:{ 
@@ -36,6 +39,8 @@ function AddArticle(props) {
         const tobody = JSON.stringify({title, description});
         axios.post(url, tobody, config)
         .then(response => {
+            console.log(response.data);
+            props.insertedArticle(response.data)
             navigate('/articles')
         })
         .catch(error => {

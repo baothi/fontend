@@ -1,6 +1,9 @@
-
+import React from 'react';
 import axios from 'axios';
-export default class APIService {
+
+
+
+export default class APIService extends React.Component{
     
     static InsertArticle(body, token) {
         const url = 'https://qatestapi.site/articles/';
@@ -13,7 +16,7 @@ export default class APIService {
         const tobody = JSON.stringify(body);
         const add =(e) => {
             axios.post(url, tobody, config)
-            .then(resp => resp.json())
+            //.then(resp => resp.json())
             .catch(e => {
                 console.log(e)
                 return

@@ -46,11 +46,13 @@ function App() {
     }
 
     // navigate('/articles')
-
-    
-  
   }, [token])
+  
 
+  const insertedArticle = (article) => {
+    const new_articles = [...articles, article]
+    setArticles(new_articles)
+  }
 
   return (
     <div>
@@ -62,7 +64,7 @@ function App() {
             element={<ArticleList articles={articles}/>}>
         </Route>
         <Route path="/articles/:slug" element={<ArticleDetails />}></Route>
-        <Route path="/add" element={<AddArticle />}></Route>
+        <Route path="/add" element={<AddArticle insertedArticle = {insertedArticle}/>}></Route>
       </Routes>
       
     </div>
